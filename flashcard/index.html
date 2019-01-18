@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>Flash!</title>
+</head>
+
+<body>
+  <div id="flashcard-app" class="container">
+
+    <h1>Flashcard App!</h1>
+
+    <div class="flashcard-form">
+      <label for="front">Front
+        <input type="text" id="front" v-model="newFront">
+      </label>
+      <label for="back">Back
+        <input type="text" id="back" v-model="newBack">
+      </label>
+      <button @click="add">Add a New Card</button>
+      <span class="error" v-show="error">Oops! Flashcards need a front and a back.</span>
+    </div>
+
+    <ul class="flashcard-list">
+      <li v-for="card in cards" @click="toggle(card)">
+        <transition name="flip">
+          <p class="card" :key="card.flipped">
+            <span class="delete-card" @click="del(card)">X</span>
+            {{ card.flipped ? card.back : card.front}}
+          </p>
+        </transition>
+      </li>
+    </ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
